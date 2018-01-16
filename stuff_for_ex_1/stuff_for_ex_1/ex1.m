@@ -1,4 +1,4 @@
-% Ex 1
+% Ex 1.12
 clc
 clf
 clear all
@@ -64,6 +64,30 @@ plot([1 200], [1 1]*threshold)
 legend('Foreground','Background','Threshold')
 
 
+%% Ex 1.15
+clc
+clf
+clear all
+close all
+
+threshold = 0.01; 
+load linearClassifier.mat;
+imgGray = read_as_grayscale('bloodcells/test_images/092.png');
+size(imgGray)
+% gcam = gpuArray(imread(imgGray));
+imgGray = padarray(imgGray,[50 50],'symmetric');
+% imagesc(padcam), colormap gray
+
+% imagesc(imgGray), colormap gray
+result = imfilter(imgGray,w);
+
+result(result >= threshold) = 1; 
+
+size(imgGray)
+
+view_with_overlay(imgGray, result);
+hold on
+rectangle('Position',[50 50 388 260])
 
 
 
