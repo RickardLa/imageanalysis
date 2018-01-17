@@ -75,18 +75,34 @@ load linearClassifier.mat;
 imgGray = read_as_grayscale('bloodcells/test_images/092.png');
 
 
-imgGray = padarray(imgGray,[50 50],'symmetric');        % Mirror image to find edge/corner-cells 
+
+imgGray = padarray(imgGray,[50 50],'s');                % Mirror image to find edge/corner-cells 
 result = imfilter(imgGray,w);                           % Filter with linear classifier
 
 result(result >= threshold) = 1;                        % Assign 1 if cell found
-
-
 
 view_with_overlay(imgGray, result);             
 hold on
 rectangle('Position',[50 50 388 260])
 
+%% Ex 1.20
+clc
+clf
+clear all
+close all
 
 
-        
+
+imgGray = read_as_grayscale('bloodcells/test_images/092.png');
+imgGray = padarray(imgGray,[50 50],'s');                % Mirror image to find edge/corner-cells 
+
+cells = cell_detector(imgGray);
+
+imagesc(imgGray), colormap gray
+hold on
+plot(cells(1,:),cells(2,:),'y*')
+hold on
+rectangle('Position',[50 50 388 260])
+
+
     
