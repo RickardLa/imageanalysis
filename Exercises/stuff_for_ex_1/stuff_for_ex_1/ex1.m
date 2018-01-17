@@ -73,19 +73,16 @@ close all
 threshold = 0.01; 
 load linearClassifier.mat;
 imgGray = read_as_grayscale('bloodcells/test_images/092.png');
-size(imgGray)
-% gcam = gpuArray(imread(imgGray));
-imgGray = padarray(imgGray,[50 50],'symmetric');
-% imagesc(padcam), colormap gray
 
-% imagesc(imgGray), colormap gray
-result = imfilter(imgGray,w);
 
-result(result >= threshold) = 1; 
+imgGray = padarray(imgGray,[50 50],'symmetric');        % Mirror image to find edge/corner-cells 
+result = imfilter(imgGray,w);                           % Filter with linear classifier
 
-size(imgGray)
+result(result >= threshold) = 1;                        % Assign 1 if cell found
 
-view_with_overlay(imgGray, result);
+
+
+view_with_overlay(imgGray, result);             
 hold on
 rectangle('Position',[50 50 388 260])
 
