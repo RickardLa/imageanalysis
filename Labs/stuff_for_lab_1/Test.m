@@ -23,3 +23,8 @@ clf
 clear 
 close all
 
+
+std = 3; 
+img = read_as_grayscale('church_test/church1.jpg');
+imgFiltered = gaussian_filter(img,std); 
+imagesc(imgFiltered), colormap gray
