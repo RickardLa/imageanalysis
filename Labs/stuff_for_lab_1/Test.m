@@ -1,15 +1,25 @@
 % Testing
+
+%% get_patch
 clc
 clf
-clear all
+clear 
 close all
 
-img = read_as_grayscale('church_test/church1.jpg');
-% img = read_image('church_test/church1.jpg');
-imagesc(img), colormap gray
+% img = read_as_grayscale('church_test/church1.jpg');
+img = read_image('church_test/church1.jpg');
+imagesc(img)
 figure
 
 patch = get_patch(img, 400,300, 200);
 
 
-imagesc(patch), colormap gray
+imagesc(patch)
+
+
+%% gaussian_filter
+clc
+clf
+clear 
+close all
+
