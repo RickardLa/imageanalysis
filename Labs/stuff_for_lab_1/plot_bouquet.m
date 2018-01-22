@@ -22,7 +22,7 @@ axis image
 quiver(grad_x,grad_y,'r','LineWidth',2)
 
 % Compute histogram
-histogram = gradient_histogram(grad_x, grad_y)
+histogram = gradient_histogram(grad_x, grad_y);
 
 
 % Set second subplot as active

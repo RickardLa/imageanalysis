@@ -13,7 +13,7 @@ if length(rowPatch) > rowImg || length(colPatch) > colImg
 end
 
 
-if dim == 3                                  % If 'image' is RGB the 3 channels                         
+if dim == 3                                  % If 'image' is RGB, the 3 channels
     R = image(:,:,1);                        % have to be treated individually
     G = image(:,:,2);
     B = image(:,:,3);
@@ -22,7 +22,7 @@ if dim == 3                                  % If 'image' is RGB the 3 channels
     patchG = G(rowPatch,colPatch);
     patchB = B(rowPatch,colPatch);
     
-    patch = cat(3,patchR,patchG,patchB);
+    patch = cat(3,patchR,patchG,patchB);     % Concatenate color channels
 else                                         % If grayscale, image is cropped directly
     patch = image(rowPatch,colPatch);
     
