@@ -51,8 +51,8 @@ clf
 clear 
 close all
 
-std = 3;
-img = read_as_grayscale('church_test/church1.jpg');
-% [grad_x, grad_y] = guassian_gradients(img, std);
+std = 4;
+img = read_as_grayscale('church_test/church2.jpg');
+
 
 plot_bouquet(img,std);
