@@ -51,8 +51,32 @@ clf
 clear 
 close all
 
-std = 4;
+std = 3;
 img = read_as_grayscale('church_test/church2.jpg');
 
+%% place_regions
+clc
+clf
+clear 
+close all
 
-plot_bouquet(img,std);
+
+img = read_image('paper_with_digits.png');
+ 
+radius = 200;
+centres = place_regions([816; 612], radius);
+
+plot_squares(img, centres, radius)
+
+%% gradient_descriptor
+clc
+clf
+clear 
+close all
+
+img = read_image('paper_with_digits.png');
+
+radius = 10;
+position = [400; 300]; 
+desc = gradient_descriptor(img, position, radius);
+
