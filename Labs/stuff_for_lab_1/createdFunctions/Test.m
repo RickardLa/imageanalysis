@@ -74,9 +74,49 @@ clf
 clear 
 close all
 
-img = read_image('paper_with_digits.png');
+img = read_as_grayscale('paper_with_digits.png');
+position = [400; 300];
+radius = 10; 
 
-radius = 10;
-position = [400; 300]; 
+
 desc = gradient_descriptor(img, position, radius);
+
+
+%% prepare_digits
+clc
+clf
+clear
+close all
+
+load digits.mat;
+
+center = [20, 20];
+r = 6;
+
+
+for i=1:length(digits_training)
+    img = digits_training(i).image;
+    digits_training(i).descriptor = gradient_descriptor(img,center,r);
+end
+
+
+
+img = digits_validation(7).image;
+imagesc(img), colormap gray;
+
+
+nr = classify_digit(img, digits_training)
+
+%% classify_all_digits
+
+%% extractSIFT
+clc
+clf
+clear
+close all
+
+img = read_as_grayscale('paper_with_digits.png');
+[coords, descriptors] = extractSIFT(img);
+
+
 
