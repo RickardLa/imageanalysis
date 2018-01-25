@@ -54,6 +54,10 @@ close all
 std = 3;
 img = read_as_grayscale('church_test/church2.jpg');
 
+[grad_x, grad_y] = gaussian_gradients(img, std);
+% histogram = gradient_histogram(grad_x,grad_y)
+plot_bouquet(img,3)
+
 %% place_regions
 clc
 clf
@@ -91,12 +95,13 @@ close all
 load digits.mat;
 
 center = [20, 20];
-r = 6;
+radius = 6;
 
 
+% Compute descriptors for all 100 training images. 
 for i=1:length(digits_training)
     img = digits_training(i).image;
-    digits_training(i).descriptor = gradient_descriptor(img,center,r);
+    digits_training(i).descriptor = gradient_descriptor(img,center,radius);
 end
 
 
@@ -108,6 +113,25 @@ imagesc(img), colormap gray;
 nr = classify_digit(img, digits_training)
 
 %% classify_all_digits
+clc
+clf
+clear
+close all
+
+load digits.mat;
+errors = 0; 
+for i=1:length(digits_validation)
+    img = digits_validation(i).image;
+    label = classify_digit(img, digits_training); 
+    
+    if label ~= digits_validation(i).label
+        errors = errors + 1; 
+    end
+    
+    
+end
+
+successRate = (1-errors/length(digits_validation))*100      % Correct answers in %
 
 %% extractSIFT
 clc
