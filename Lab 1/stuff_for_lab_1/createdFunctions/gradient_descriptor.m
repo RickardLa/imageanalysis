@@ -1,6 +1,6 @@
 function desc = gradient_descriptor(image, position, radius)
 
-    [grad_x, grad_y] = gaussian_gradients(image,radius/10);                   % Compute gradients for entire image. std is proportional to radius
+    [grad_x, grad_y] = gaussian_gradients(image,radius/4);                   % Compute gradients for entire image. std is proportional to radius
     regions = place_regions(position, radius);                                % Place 3x3-grid at given position
     
 
