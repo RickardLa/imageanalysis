@@ -11,7 +11,7 @@ img = read_image('church_test/church1.jpg');
 imagesc(img)
 figure
 
-patch = get_patch(img, 400,300, 200);
+patch = get_patch(img, 300,500, 100);
 
 
 imagesc(patch)
@@ -141,6 +141,21 @@ close all
 
 img = read_as_grayscale('paper_with_digits.png');
 [coords, descriptors] = extractSIFT(img);
+
+
+%% classify_church
+clc
+clf
+clear
+close 
+
+image = read_as_grayscale('church_test/church10.jpg');
+load church_data.mat;
+load manual_labels.mat; 
+[label, name] = classify_church(image, feature_collection)
+
+
+
 
 
 

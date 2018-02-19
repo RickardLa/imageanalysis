@@ -3,7 +3,7 @@ function patch = get_patch(image, x, y, patch_radius)
 % x = center column of patch
 % y = center row of patch
 
-[colImg,rowImg, dim] = size(image);                 % Size of input image. 
+[rowImg,colImg, dim] = size(image);                 % Size of input image. 
                                                     % dim = 3 --> RGB
                                                     % dim = 1 --> grayscale
                                                     
@@ -24,13 +24,13 @@ if dim == 3                                  % If 'image' is RGB, the 3 channels
     G = image(:,:,2);
     B = image(:,:,3);
     
-    patchR = R(colPatch,rowPatch);
-    patchG = G(colPatch,rowPatch);
-    patchB = B(colPatch,rowPatch);
+    patchR = R(rowPatch,colPatch);
+    patchG = G(rowPatch,colPatch);
+    patchB = B(rowPatch,colPatch);
     
     patch = cat(3,patchR,patchG,patchB);     % Concatenate color channels
 else                                         % If grayscale, image is cropped directly
-    patch = image(colPatch,rowPatch);
+    patch = image(rowPatch,colPatch);
     
 end
 
