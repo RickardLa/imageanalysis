@@ -1,4 +1,6 @@
 % Testing
+% This script was used for testing all our created functions. 
+
 
 %% get_patch
 clc
@@ -119,19 +121,19 @@ clear
 close all
 
 load digits.mat;
-errors = 0; 
+correct = 0; 
 for i=1:length(digits_validation)
     img = digits_validation(i).image;
-    label = classify_digit(img, digits_training); 
+    label = classify_digit(img, digits_training);
     
-    if label ~= digits_validation(i).label
-        errors = errors + 1; 
+    if label == digits_validation(i).label
+        correct = correct + 1; 
     end
     
     
 end
-
-successRate = (1-errors/length(digits_validation))*100      % Correct answers in %
+% correct
+successRate = correct/length(digits_validation)*100      % Correct answers in %
 
 %% extractSIFT
 clc
@@ -139,8 +141,61 @@ clf
 clear
 close all
 
-img = read_as_grayscale('paper_with_digits.png');
-[coords, descriptors] = extractSIFT(img);
+load church_data.mat;
+
+image = read_as_grayscale('church_test/church2.jpg');
+[coords, descriptors] = extractSIFT(image);     
+
+
+
+
+corrs = matchFeatures(feature_collection.descriptors',descriptors', 'MatchThreshold', 100, 'MaxRatio', 0.7);
+
+
+
+
+
+
+% 
+imagesc(image), colormap gray
+hold on
+% plot(,,'*')
+
+% [label, name] = classify_church(image, feature_collection);
+
+
+
+%% classify_church
+clc
+clf
+clear 
+close
+
+load manual_labels.mat;
+load church_data.mat;
+
+correct = 0; 
+for i=1:10
+    src = 'church_test/church'; 
+    image = read_as_grayscale([src num2str(i) '.jpg']);
+    [label, name] = classify_church(image, feature_collection);
+    
+  
+              
+    diff = setdiff(name,manual_labels{i});
+    if  isempty(diff) == 1
+        correct = correct + 1;     
+    end
+
+
+
+
+
+
+end
+
+    
+   
 
 
 %% classify_church
